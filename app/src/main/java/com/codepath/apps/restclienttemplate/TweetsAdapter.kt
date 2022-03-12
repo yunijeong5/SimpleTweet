@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.codepath.apps.restclienttemplate.models.Tweet
 
 class TweetsAdapter(val tweets: ArrayList<Tweet>) : RecyclerView.Adapter<TweetsAdapter.ViewHolder>() {
@@ -31,7 +32,7 @@ class TweetsAdapter(val tweets: ArrayList<Tweet>) : RecyclerView.Adapter<TweetsA
         holder.tvTweetBody.text = tweet.body
         holder.tvTimestamp.text = "\u2022 " + tweet.getFormattedTimestamp()
 
-        Glide.with(holder.itemView).load(tweet.user?.publicImageUrl).into(holder.ivProfileImage)
+        Glide.with(holder.itemView).load(tweet.user?.publicImageUrl).transform(CircleCrop()).into(holder.ivProfileImage)
 
 
     }

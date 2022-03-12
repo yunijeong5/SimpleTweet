@@ -13,6 +13,9 @@ import org.json.JSONException
 
 class TimelineActivity : AppCompatActivity() {
 
+    // Store a member variable for the listener
+    private val scrollListener: EndlessRecyclerViewScrollListener? = null
+
     lateinit var client: TwitterClient
     lateinit var rvTweets: RecyclerView
     lateinit var adapter: TweetsAdapter
