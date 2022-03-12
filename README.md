@@ -53,7 +53,7 @@ I think I'll need some help from the Slack channel or TA office hours...
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2022] [Yuni Jeong]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
