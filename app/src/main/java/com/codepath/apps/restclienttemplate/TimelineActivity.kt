@@ -1,13 +1,17 @@
 package com.codepath.apps.restclienttemplate
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.codepath.apps.restclienttemplate.models.Tweet
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import okhttp3.Headers
 import org.json.JSONException
 
@@ -22,11 +26,23 @@ class TimelineActivity : AppCompatActivity() {
     lateinit var swipeContainer: SwipeRefreshLayout
     val tweets = ArrayList<Tweet>()
 
+    lateinit var composeButton: FloatingActionButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_timeline)
 
         client = TwitterApplication.getRestClient(this)
+
+        // FAB (Compose) button
+        composeButton = findViewById(R.id.compose)
+        composeButton.setOnClickListener {
+            // Navigate to compose screen
+            val intent = Intent(this, ComposeActivity::class.java)
+            startActivityForResult(intent, REQUEST_CODE)
+        }
+
+
 
         swipeContainer = findViewById(R.id.swipeContainer)
         swipeContainer.setOnRefreshListener {
@@ -50,6 +66,26 @@ class TimelineActivity : AppCompatActivity() {
         populateHomeTimeline()
 
     }
+
+    // called when we comes back from ComposeActivity
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+
+            // Get data from out intent (our tweet)
+            val tweet = data?.getParcelableExtra("tweet") as Tweet
+
+            // update timeline
+            // modifying the data source of tweets
+            tweets.add(0, tweet)
+
+            // update adapter
+            adapter.notifyItemInserted(0)
+            rvTweets.smoothScrollToPosition(0)
+        }
+
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
 
     fun populateHomeTimeline() {
         client.getHomeTimeline(object: JsonHttpResponseHandler() {
@@ -86,5 +122,6 @@ class TimelineActivity : AppCompatActivity() {
 
     companion object {
         const val TAG = "TimelineActivity"
+        val REQUEST_CODE = 10
     }
 }

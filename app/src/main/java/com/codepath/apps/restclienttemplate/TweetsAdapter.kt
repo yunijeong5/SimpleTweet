@@ -30,7 +30,7 @@ class TweetsAdapter(val tweets: ArrayList<Tweet>) : RecyclerView.Adapter<TweetsA
         holder.tvUserName.text = tweet.user?.name
         holder.tvUserId.text =  "\u0040" + tweet.user?.screenName
         holder.tvTweetBody.text = tweet.body
-        holder.tvTimestamp.text = "\u2022 " + tweet.getFormattedTimestamp()
+        holder.tvTimestamp.text = "\u2219 " + tweet.getFormattedTimestamp()
 
         Glide.with(holder.itemView).load(tweet.user?.publicImageUrl).transform(CircleCrop()).into(holder.ivProfileImage)
 

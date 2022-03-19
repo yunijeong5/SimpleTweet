@@ -24,9 +24,12 @@
         android:layout_marginLeft="10dp"
         android:textColor="#000000"
         android:textStyle="bold"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:maxEms="7"
         app:layout_constraintStart_toEndOf="@+id/ivProfileImage"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="yunijeong" />
+        tools:text="username usernameusername" />
 
     <TextView
         android:id="@+id/tvUserId"
@@ -35,13 +38,13 @@
         app:layout_constraintHorizontal_bias="0"
         android:ellipsize="end"
         android:maxLines="1"
+        android:maxEms="7"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="5dp"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@id/tvUsername"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/tvTimestamp"
-        tools:text="\@some_user_name_suhere and " />
+        tools:text="\@some_user_nm_ome_user_nm_nm_ome_user_" />
 
 
     <TextView
@@ -49,9 +52,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="15dp"
         android:text="10h"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvUserId"
         app:layout_constraintTop_toTopOf="parent" />
