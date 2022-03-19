@@ -1,6 +1,7 @@
 package com.codepath.apps.restclienttemplate
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -44,6 +45,11 @@ class ComposeActivity : AppCompatActivity() {
             override fun onTextChanged(p0: CharSequence, p1: Int, p2: Int, p3: Int) {
                 tvTweetCounter.text = etCompose.text.length.toString() + " / 280"
                 btnTweet.isEnabled = etCompose.text.toString().isNotEmpty() && etCompose.text.length <= 280
+                if (etCompose.text.length > 280) {
+                    tvTweetCounter.setTextColor(Color.parseColor("#D0342C"))
+                } else {
+                    tvTweetCounter.setTextColor(Color.parseColor("#000000"))
+                }
             }
 
         })
@@ -59,7 +65,7 @@ class ComposeActivity : AppCompatActivity() {
                 Toast.makeText(this, "Empty tweets not allowed!", Toast.LENGTH_SHORT).show()
             } else {
                 // 2. make sure the tweet is under character count
-                if (tweetContent.length == 280) {
+                if (tweetContent.length > 280) {
                     Toast.makeText(this, "Tweet reached max length! Limit is 280 characters", Toast.LENGTH_SHORT).show()
                 } else {
                     // Make an api call to Twitter to publish tweet
